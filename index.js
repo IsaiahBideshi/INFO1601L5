@@ -46,8 +46,6 @@ const students = [bob, sally, paul];
 
 
 function getAverateGrade(student, course){
-    let avg = 0;
-
     for (let record of student.transcript){
         if(record.course !== course) continue;
         let sum = 0;
@@ -70,5 +68,19 @@ function getAssignmentMark(student, course, num){
     return -1;
 }
 
+function averageAssessment(students, courseName, assignment){
+    let sum = 0.0, count = 0;
+    for(let student of students){
+        for (let record of student.transcript){
+            if (record.course === courseName){
+                sum += record.grades[assignment-1];
+                count++;
+            }
+        }
+    }
+    return sum / count;
+}
+
 console.log(getAverateGrade(bob, "INFO 1601"));
 console.log(getAssignmentMark(bob, "INFO 1601", 2));
+console.log(averageAssessment([bob, sally, paul], "INFO 1601", 2));
